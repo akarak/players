@@ -15,10 +15,10 @@ console.log(store.getState())
 
 store.dispatch(addPlayer({ firstname:'John', surname: 'Smith'}))
 store.dispatch(addPlayer({ firstname:'Dave', surname: 'Durant'}))
-store.dispatch(setTextFilter('t'))
+store.dispatch(setTextFilter('a'))
 
 const state = store.getState()
-const pp = getPlayers(state.players)
+const pp = getPlayers(state.players, state.filters)
 console.log(pp)
 
 const jsx = (
