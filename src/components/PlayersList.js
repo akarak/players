@@ -8,7 +8,7 @@ const PlayersList = (props) => (
         <h3>Players list</h3>
         {props.text}
         {props.players.map((player) => {
-            return <PlayerListItem {...player } />
+            return <PlayerListItem key={player.id} {...player } />
         })}
   </div>
 );

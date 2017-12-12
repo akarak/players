@@ -15,7 +15,7 @@ console.log(store.getState())
 
 store.dispatch(addPlayer({ firstname:'John', surname: 'Smith'}))
 store.dispatch(addPlayer({ firstname:'Dave', surname: 'Durant'}))
-store.dispatch(setTextFilter('a'))
+store.dispatch(setTextFilter(''))
 
 const state = store.getState()
 const pp = getPlayers(state.players, state.filters)
