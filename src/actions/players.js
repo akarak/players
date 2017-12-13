@@ -3,9 +3,13 @@ import uuid from 'uuid'
 export const addPlayer = (
     {
         firstname = "",
+        initial = "",
         surname = "???",
         country = "GBR",
-        favourite = 0,
+        favourite = true,
+        notes = '',
+        value = 0,
+        dob = 0,
         wins = 0
     } = {}
 ) => ({
@@ -13,10 +17,15 @@ export const addPlayer = (
     player: {
         id: uuid(),
         firstname,
+        initial,
         surname,
         country,
-        favourite,
-        wins
+        favourite,   // checkbox
+        notes,
+        value,      // decimal points
+        dob,        // date
+        wins,       // numeric
+        
     }
 })
 

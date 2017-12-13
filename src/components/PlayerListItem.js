@@ -6,7 +6,7 @@ const PlayerListItem = (props) => (
         <Link to={`/player/${props.id}`}>
             <div>Edit</div>
         </Link>
-        {props.firstname} - {props.surname} : {props.country}
+        {props.firstname} - {props.initial} - {props.surname} : {props.country}
     </div>
 )
 
