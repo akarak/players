@@ -2,7 +2,7 @@ import React from 'react';
 
 const CountrySelector = (props) => (
   <div>
-        <select onChange={props.onChange}>
+        <select value={props.optionState} onChange={props.onChange}>
             <option value="AFG">Afghanistan</option>
             <option value="ALA">Åland Islands</option>
             <option value="ALB">Albania</option>

@@ -1,16 +1,23 @@
 import React from 'react';
 import CountrySelector from './CountrySelector'
+import CheckboxList from './CheckboxList'
 import moment from 'moment'
 import { SingleDatePicker } from 'react-dates'
+import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css'
-import ThemedStyleSheet from 'react-with-styles/lib/ThemedStyleSheet';
-import aphroditeInterface from 'react-with-styles-interface-aphrodite';
 
-ThemedStyleSheet.registerInterface(aphroditeInterface);
 
 export default class PlayerForm extends React.Component {
     constructor(props) {
         super(props)
+        moment.updateLocale('en', {
+            longDateFormat : {
+                LT: "h:mm A",
+                LTS: "h:mm:ss A",
+                L: "DD/MM/YYYY"
+            }
+        });
+
         this.state = {
             firstname: props.player ? props.player.firstname : '',
             initial: props.player ? props.player.initial : '',
@@ -39,6 +46,11 @@ export default class PlayerForm extends React.Component {
         this.setState(() => ({ surname }))
     }
 
+    onNotesChange = (e) => {
+        const notes = e.target.value
+        this.setState(() => ({ notes }))
+    }
+
     onValueChange = (e) => {
         const value = e.target.value
         if (!value || value.match(/^\d{1,}(\.\d{0,2})?$/)) {
@@ -47,7 +59,6 @@ export default class PlayerForm extends React.Component {
     }
     onCountryChange = (e) => {
         const country = e.target.value
-        console.log("Country:", country)
         this.setState(() => ({ country }))
     }
     onDateChange = (dob) => {
@@ -75,8 +86,8 @@ export default class PlayerForm extends React.Component {
                 initial: this.state.initial,
                 surname: this.state.surname,
                 country:  this.state.country,
-                amount: parseFloat(this.state.amount, 10) * 100,
-                dob: this.state.createdAt.valueOf(),
+                value: parseFloat(this.state.value, 10) * 100,
+                dob: this.state.dob.valueOf(),
                 notes: this.state.notes
         
             })       
@@ -111,7 +122,10 @@ export default class PlayerForm extends React.Component {
                         value={this.state.value}
                         onChange={this.onValueChange}
                     />
-                    <CountrySelector onChange={this.onCountryChange} />
+                    <CountrySelector
+                        optionState = {this.state.country} 
+                        onChange={this.onCountryChange} />
+
                     <SingleDatePicker
                         date={this.state.dob}
                         onDateChange={this.onDateChange}
@@ -123,9 +137,11 @@ export default class PlayerForm extends React.Component {
                     <textarea
                         placeholder="Add a note (optional)"
                         value={this.state.notes}
-                        onChange={this.onNoteChange}
+                        onChange={this.onNotesChange}
                     >
                     </textarea>
+
+                    <CheckboxList items={['red','green', 'blue']} />
 
                     <button>Save</button>
 
